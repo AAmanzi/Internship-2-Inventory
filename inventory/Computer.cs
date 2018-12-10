@@ -15,7 +15,7 @@ namespace inventory
         }
 
         public Computer(int serialNumber, string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, string manufacturer, 
+            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
             bool hasBattery, string operativeSystem, bool isPortable)
 
             : base(serialNumber, description, yearPurchased, monthPurchased,

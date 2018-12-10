@@ -16,7 +16,7 @@ namespace inventory
         }
 
         public MobilePhone(int serialNumber, string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, string manufacturer, 
+            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
             bool hasBattery, string phoneNumber, string nameOfOwner, string lastNameOfOwner)
 
             : base(serialNumber, description, yearPurchased, monthPurchased, dayPurchased, 

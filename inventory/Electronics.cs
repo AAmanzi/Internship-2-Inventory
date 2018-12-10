@@ -14,7 +14,7 @@ namespace inventory
         }
 
         public Electronics(int serialNumber, string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, string manufacturer, bool hasBattery)
+            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, bool hasBattery)
 
             : base(serialNumber, description, yearPurchased, monthPurchased,
                 dayPurchased, warrantyInMonths, priceWhenPurchased, manufacturer)

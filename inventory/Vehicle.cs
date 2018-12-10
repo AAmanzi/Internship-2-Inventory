@@ -15,7 +15,7 @@ namespace inventory
         }
 
         public Vehicle(int serialNumber, string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, string manufacturer, 
+            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
             int expireYear, int expireMonth, int expireDay, int distanceRanInKm)
 
             : base(serialNumber, description, yearPurchased, monthPurchased, dayPurchased, 
