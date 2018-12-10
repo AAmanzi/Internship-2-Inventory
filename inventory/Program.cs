@@ -11,8 +11,11 @@ namespace inventory
             var allPhones = InitiatePhones();
             var allComputers = InitiateComputers();
 
-            PrintAllProducts(allVehicles, allPhones, allComputers);
+            //PrintAllProducts(allVehicles, allPhones, allComputers);
+            PrintComputersWarrantyEndingIn("2019", allComputers);
         }
+
+
 
         static Company StringToCompany(string company)
         {
@@ -103,12 +106,12 @@ namespace inventory
             return allComputers;
         }
 
-        static void DeleteProduct(string toDeleteSerialNumber, List<Vehicle> allVehicles, 
+        static void DeleteProduct(string toDeleteSerialNumber, List<Vehicle> allVehicles,
             List<MobilePhone> allPhones, List<Computer> allComputers)
         {
             foreach (var vehicle in allVehicles)
             {
-                if (vehicle.SerialNumber.ToString().ToLower() == toDeleteSerialNumber.ToLower())
+                if (vehicle.SerialNumber.ToString().ToLower().Contains(toDeleteSerialNumber.ToLower()))
                 {
                     allVehicles.Remove(vehicle);
                     return;
@@ -116,7 +119,7 @@ namespace inventory
             }
             foreach (var phone in allPhones)
             {
-                if (phone.SerialNumber.ToString().ToLower() == toDeleteSerialNumber.ToLower())
+                if (phone.SerialNumber.ToString().ToLower().Contains(toDeleteSerialNumber.ToLower()))
                 {
                     allPhones.Remove(phone);
                     return;
@@ -124,7 +127,7 @@ namespace inventory
             }
             foreach (var computer in allComputers)
             {
-                if (computer.SerialNumber.ToString().ToLower() == toDeleteSerialNumber.ToLower())
+                if (computer.SerialNumber.ToString().ToLower().Contains(toDeleteSerialNumber.ToLower()))
                 {
                     allComputers.Remove(computer);
                     return;
@@ -174,6 +177,52 @@ namespace inventory
             Console.WriteLine("COMPUTERS:\n\n");
             PrintAllComputers(allComputers);
             Console.WriteLine();
+        }
+
+        static void PrintProductBySerial(string serialNumber, List<Vehicle> allVehicles,
+            List<MobilePhone> allPhones, List<Computer> allComputers)
+        {
+            serialNumber.Replace(" ", "-").Replace("_", "-").Replace(".", "-");
+            foreach (var vehicle in allVehicles)
+            {
+                if (vehicle.SerialNumber.ToString().ToLower().Contains(serialNumber.ToLower()))
+                {
+                    vehicle.Print();
+                    return;
+                }
+            }
+            foreach (var phone in allPhones)
+            {
+                if (phone.SerialNumber.ToString().ToLower().Contains(serialNumber.ToLower()))
+                {
+                    phone.Print();
+                    return;
+                }
+            }
+            foreach (var computer in allComputers)
+            {
+                if (computer.SerialNumber.ToString().ToLower().Contains(serialNumber.ToLower()))
+                {
+                    computer.Print();
+                    return;
+                }
+            }
+            Console.WriteLine("\nNo product with that serial number has been found!\n");
+        }
+
+        static void PrintComputersWarrantyEndingIn(string inputYear, List<Computer> allComputers)
+        {
+            inputYear.Replace(" ", "");
+
+            foreach (var computer in allComputers)
+            {
+                var warrantyEndYear = computer.DatePurchased.AddMonths(computer.WarrantyInMonths).Year;
+                if (warrantyEndYear == int.Parse(inputYear))
+                {
+                    computer.Print();
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }
