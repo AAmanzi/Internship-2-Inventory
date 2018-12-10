@@ -13,8 +13,8 @@ namespace inventory
 
         }
 
-        public Electronics(string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, bool hasBattery)
+        public Electronics(string description, string yearPurchased, string monthPurchased,
+            string dayPurchased, string warrantyInMonths, string priceWhenPurchased, Company manufacturer, bool hasBattery)
 
             : base(description, yearPurchased, monthPurchased,
                 dayPurchased, warrantyInMonths, priceWhenPurchased, manufacturer)

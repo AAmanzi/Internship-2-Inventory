@@ -72,11 +72,11 @@ namespace inventory
         {
             var allVehicles = new List<Vehicle>()
             {
-                new Vehicle("", 2010, 7, 13, 60, 100000, Company.Alfa, 2020, 7, 13, 120000),
-                new Vehicle("", 2007, 10, 23, 60, 120000, Company.Lancia, 2019, 10, 23, 210000),
-                new Vehicle("", 2016, 1, 19, 60, 240000, Company.Volkswagen, 2024, 1, 19, 60000),
-                new Vehicle("", 2012, 6, 24, 60, 260000, Company.Audi, 2022, 6, 24, 150000),
-                new Vehicle("", 1996, 12, 1, 60, 90000, Company.Citroen, 2019, 2, 19, 170000),
+                new Vehicle("", "2010", "7", "13", "60", "100000", Company.Alfa, "2020", "7", "13", "120000"),
+                new Vehicle("", "2007", "10", "23", "60", "120000", Company.Lancia, "2019", "10", "23", "210000"),
+                new Vehicle("", "2016", "1", "19", "60", "240000", Company.Volkswagen, "2024", "1", "19", "60000"),
+                new Vehicle("", "2012", "6", "24", "60", "260000", Company.Audi, "2022", "6", "24", "150000"),
+                new Vehicle("", "1996", "12", "1", "60", "90000", Company.Citroen, "2019", "2", "19", "170000"),
             };
             return allVehicles;
         }
@@ -85,9 +85,9 @@ namespace inventory
         {
             var allPhones = new List<MobilePhone>()
             {
-                new MobilePhone("", 2018, 4, 24, 12, 1000, Company.Xiaomi, "091123", "name1", "lname1"),
-                new MobilePhone("", 2017, 9, 17, 24, 7000, Company.Apple, "091456", "name2", "lname2"),
-                new MobilePhone("", 2016, 7, 6, 12, 6500, Company.Samsung, "091789", "name3", "lname3"),
+                new MobilePhone("", "2018", "4", "24", "12", "1000", Company.Xiaomi, "091123", "name1", "lname1"),
+                new MobilePhone("", "2017", "9", "17", "24", "7000", Company.Apple, "091456", "name2", "lname2"),
+                new MobilePhone("", "2016", "7", "6", "12", "6500", Company.Samsung, "091789", "name3", "lname3"),
             };
             return allPhones;
         }
@@ -96,9 +96,9 @@ namespace inventory
         {
             var allComputers = new List<Computer>()
             {
-                new Computer("", 2018, 4, 30, 12, 7500, Company.HP, false, "windows", false),
-                new Computer("", 2017, 9, 3, 12, 7000, Company.Lenovo, true, "linux", true),
-                new Computer("", 2018, 6, 24, 12, 8500, Company.Asus, true, "windows", true),
+                new Computer("", "2018", "4", "30", "12", "7500", Company.HP, false, "windows", false),
+                new Computer("", "2017", "9", "3", "12", "7000", Company.Lenovo, true, "linux", true),
+                new Computer("", "2018", "6", "24", "12", "8500", Company.Asus, true, "windows", true),
             };
             return allComputers;
         }
@@ -133,27 +133,47 @@ namespace inventory
             Console.WriteLine("\nNo product with that serial number has been found!\n");
         }
 
-        static void PrintAllProducts(List<Vehicle> allVehicles,
-            List<MobilePhone> allPhones, List<Computer> allComputers)
+        static void PrintAllVehicles(List<Vehicle> allVehicles)
         {
-            Console.WriteLine("VEHICLES:\n");
             foreach (var vehicle in allVehicles)
             {
                 vehicle.Print();
                 Console.WriteLine();
             }
-            Console.WriteLine("\nPHONES:\n");
+        }
+
+        static void PrintAllPhones(List<MobilePhone> allPhones)
+        {
             foreach (var phone in allPhones)
             {
                 phone.Print();
                 Console.WriteLine();
-            }
-            Console.WriteLine("\nCOMPUTERS:\n");
+            }   
+        }
+
+        static void PrintAllComputers(List<Computer> allComputers)
+        {
             foreach (var computer in allComputers)
             {
                 computer.Print();
                 Console.WriteLine();
             }
+        }
+
+        static void PrintAllProducts(List<Vehicle> allVehicles,
+            List<MobilePhone> allPhones, List<Computer> allComputers)
+        {
+            Console.WriteLine("VEHICLES:\n\n");
+            PrintAllVehicles(allVehicles);
+            Console.WriteLine();
+            
+            Console.WriteLine("PHONES:\n\n");
+            PrintAllPhones(allPhones);
+            Console.WriteLine();
+
+            Console.WriteLine("COMPUTERS:\n\n");
+            PrintAllComputers(allComputers);
+            Console.WriteLine();
         }
     }
 }

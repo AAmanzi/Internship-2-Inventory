@@ -37,7 +37,7 @@ namespace inventory
         public string Description { get; set; }
         public DateTime DatePurchased { get; set; }
         public int WarrantyInMonths { get; set; }
-        public double PriceWhenPurchased { get; set; }
+        public int PriceWhenPurchased { get; set; }
         public Company Manufacturer { get; set; }
 
         public Product()
@@ -45,17 +45,17 @@ namespace inventory
 
         }
 
-        public Product(string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer)
+        public Product(string description, string yearPurchased, string monthPurchased,
+            string dayPurchased, string warrantyInMonths, string priceWhenPurchased, Company manufacturer)
         {
-            DatePurchased = DatePurchased.AddYears(yearPurchased-1);
-            DatePurchased = DatePurchased.AddMonths(monthPurchased-1);
-            DatePurchased = DatePurchased.AddDays(dayPurchased-1);
+            DatePurchased = DatePurchased.AddYears(int.Parse(yearPurchased) - 1);
+            DatePurchased = DatePurchased.AddMonths(int.Parse(monthPurchased)-1);
+            DatePurchased = DatePurchased.AddDays(int.Parse(dayPurchased)-1);
 
             SerialNumber = Guid.NewGuid();
             Description = description;
-            WarrantyInMonths = warrantyInMonths;
-            PriceWhenPurchased = priceWhenPurchased;
+            WarrantyInMonths = int.Parse(warrantyInMonths);
+            PriceWhenPurchased = int.Parse(priceWhenPurchased);
             Manufacturer = manufacturer;
         }
         

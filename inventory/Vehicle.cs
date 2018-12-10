@@ -14,18 +14,18 @@ namespace inventory
 
         }
 
-        public Vehicle(string description, int yearPurchased, int monthPurchased,
-            int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
-            int expireYear, int expireMonth, int expireDay, int distanceRanInKm)
+        public Vehicle(string description, string yearPurchased, string monthPurchased,
+            string dayPurchased, string warrantyInMonths, string priceWhenPurchased, Company manufacturer, 
+            string expireYear, string expireMonth, string expireDay, string distanceRanInKm)
 
             : base(description, yearPurchased, monthPurchased, dayPurchased, 
                   warrantyInMonths, priceWhenPurchased,manufacturer) 
         {
-            LicenseExpireDate = LicenseExpireDate.AddYears(expireYear-1);
-            LicenseExpireDate = LicenseExpireDate.AddMonths(expireMonth-1);
-            LicenseExpireDate = LicenseExpireDate.AddDays(expireDay-1);
+            LicenseExpireDate = LicenseExpireDate.AddYears(int.Parse(expireYear)-1);
+            LicenseExpireDate = LicenseExpireDate.AddMonths(int.Parse(expireMonth)-1);
+            LicenseExpireDate = LicenseExpireDate.AddDays(int.Parse(expireDay)-1);
 
-            DistanceRanInKm = distanceRanInKm;
+            DistanceRanInKm = int.Parse(distanceRanInKm);
         }
 
         public new void Print()
