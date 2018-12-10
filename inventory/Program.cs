@@ -11,8 +11,7 @@ namespace inventory
             var allPhones = InitiatePhones();
             var allComputers = InitiateComputers();
 
-            //PrintAllProducts(allVehicles, allPhones, allComputers);
-            PrintComputersWarrantyEndingIn("2019", allComputers);
+            PrintAllProducts(allVehicles, allPhones, allComputers);
         }
 
 
@@ -68,6 +67,25 @@ namespace inventory
                 default:
                     Console.WriteLine("\nThat is not a valid manufacturer!\n");
                     return Company.Default;
+            }
+        }
+
+        static OS StringToOS(string operatingSystem)
+        {
+            operatingSystem.Replace(" ", "");
+            operatingSystem.ToLower();
+            switch(operatingSystem)
+            {
+                case "windows":
+                    return OS.Windows;
+                case "linux":
+                    return OS.Linux;
+                case "mac":
+                case "macos":
+                    return OS.MacOS;
+                default:
+                    Console.WriteLine("\nThat is not a valid Operating System!\n");
+                    return OS.Default;
             }
         }
 
@@ -224,5 +242,35 @@ namespace inventory
                 }
             }
         }
+
+        static int NumberOfProductsWithBatteries(List<MobilePhone> allPhones, List<Computer> allComputers)
+        {
+            var countBatteries = 0;
+
+            foreach (var phone in allPhones)
+            {
+                if (phone.HasBattery == true)
+                    countBatteries++;
+            }
+
+            foreach (var computer in allComputers)
+            {
+                if (computer.HasBattery == true)
+                    countBatteries++;
+            }
+
+            return countBatteries;
+        }
+
+        static void PrintPhoneByManufacturer(Company manufacturerForSearch, List<MobilePhone> allPhones)
+        {
+            foreach (var phone in allPhones)
+            {
+                if (phone.Manufacturer == manufacturerForSearch)
+                    phone.Print();
+            }
+        }
+
+
     }
 }
