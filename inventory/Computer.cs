@@ -14,15 +14,22 @@ namespace inventory
 
         }
 
-        public Computer(int serialNumber, string description, int yearPurchased, int monthPurchased,
+        public Computer(string description, int yearPurchased, int monthPurchased,
             int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
             bool hasBattery, string operativeSystem, bool isPortable)
 
-            : base(serialNumber, description, yearPurchased, monthPurchased,
+            : base(description, yearPurchased, monthPurchased,
                 dayPurchased, warrantyInMonths, priceWhenPurchased, manufacturer, hasBattery)
         {
             OperativeSystem = operativeSystem;
             IsPortable = isPortable;
+        }
+
+        public new void Print()
+        {
+            base.Print();
+            Console.WriteLine("Operative system: " + OperativeSystem);
+            Console.WriteLine("Is portable: " + IsPortable);
         }
     }
 }

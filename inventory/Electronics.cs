@@ -13,13 +13,19 @@ namespace inventory
 
         }
 
-        public Electronics(int serialNumber, string description, int yearPurchased, int monthPurchased,
+        public Electronics(string description, int yearPurchased, int monthPurchased,
             int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, bool hasBattery)
 
-            : base(serialNumber, description, yearPurchased, monthPurchased,
+            : base(description, yearPurchased, monthPurchased,
                 dayPurchased, warrantyInMonths, priceWhenPurchased, manufacturer)
         {
             HasBattery = hasBattery;
+        }
+
+        public new void Print()
+        {
+            base.Print();
+            Console.WriteLine("Has battery: " + HasBattery);
         }
     }
 }

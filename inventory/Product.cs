@@ -33,7 +33,7 @@ namespace inventory
     }
     public class Product
     {
-        public int SerialNumber{ get; set; }
+        public Guid SerialNumber{ get; set; }
         public string Description { get; set; }
         public DateTime DatePurchased { get; set; }
         public int WarrantyInMonths { get; set; }
@@ -45,19 +45,28 @@ namespace inventory
 
         }
 
-        public Product(int serialNumber, string description, int yearPurchased, int monthPurchased,
+        public Product(string description, int yearPurchased, int monthPurchased,
             int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer)
         {
             DatePurchased = DatePurchased.AddYears(yearPurchased-1);
             DatePurchased = DatePurchased.AddMonths(monthPurchased-1);
             DatePurchased = DatePurchased.AddDays(dayPurchased-1);
 
-            SerialNumber = serialNumber;
+            SerialNumber = Guid.NewGuid();
             Description = description;
             WarrantyInMonths = warrantyInMonths;
             PriceWhenPurchased = priceWhenPurchased;
             Manufacturer = manufacturer;
         }
         
+        public void Print()
+        {
+            Console.WriteLine("Serial number: " + SerialNumber);
+            Console.WriteLine("Description: " + Description);
+            Console.WriteLine($"Date Purchased: {DatePurchased.Day}/{DatePurchased.Month}/{DatePurchased.Year}");
+            Console.WriteLine("Warranty: " + WarrantyInMonths + " Months");
+            Console.WriteLine("Price when purchased: " + PriceWhenPurchased + "Kn");
+            Console.WriteLine("Manufacturer: " + Manufacturer);
+        }
     }
 }

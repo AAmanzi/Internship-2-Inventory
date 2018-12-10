@@ -14,11 +14,11 @@ namespace inventory
 
         }
 
-        public Vehicle(int serialNumber, string description, int yearPurchased, int monthPurchased,
+        public Vehicle(string description, int yearPurchased, int monthPurchased,
             int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
             int expireYear, int expireMonth, int expireDay, int distanceRanInKm)
 
-            : base(serialNumber, description, yearPurchased, monthPurchased, dayPurchased, 
+            : base(description, yearPurchased, monthPurchased, dayPurchased, 
                   warrantyInMonths, priceWhenPurchased,manufacturer) 
         {
             LicenseExpireDate = LicenseExpireDate.AddYears(expireYear-1);
@@ -26,6 +26,13 @@ namespace inventory
             LicenseExpireDate = LicenseExpireDate.AddDays(expireDay-1);
 
             DistanceRanInKm = distanceRanInKm;
+        }
+
+        public new void Print()
+        {
+            base.Print();
+            Console.WriteLine($"License expires: {LicenseExpireDate.Day}/{LicenseExpireDate.Month}/{LicenseExpireDate.Year}");
+            Console.WriteLine("Distance ran: " + DistanceRanInKm + " Km");
         }
     }
 }

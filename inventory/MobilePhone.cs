@@ -15,16 +15,25 @@ namespace inventory
 
         }
 
-        public MobilePhone(int serialNumber, string description, int yearPurchased, int monthPurchased,
+        public MobilePhone(string description, int yearPurchased, int monthPurchased,
             int dayPurchased, int warrantyInMonths, double priceWhenPurchased, Company manufacturer, 
-            bool hasBattery, string phoneNumber, string nameOfOwner, string lastNameOfOwner)
+            string phoneNumber, string nameOfOwner, string lastNameOfOwner)
 
-            : base(serialNumber, description, yearPurchased, monthPurchased, dayPurchased, 
-                warrantyInMonths, priceWhenPurchased, manufacturer, hasBattery)
+            : base(description, yearPurchased, monthPurchased, dayPurchased, 
+                warrantyInMonths, priceWhenPurchased, manufacturer, true)
         {
             PhoneNumber = phoneNumber;
             NameOfOwner = nameOfOwner;
             LastNameOfOwner = lastNameOfOwner;
         }
+
+        public new void Print()
+        {
+            base.Print();
+            Console.WriteLine("Phone number: " + PhoneNumber);
+            Console.WriteLine("Name of owner: " + NameOfOwner);
+            Console.WriteLine("Last name of owner: " + LastNameOfOwner);
+        }
     }
+
 }
