@@ -11,20 +11,7 @@ namespace inventory
             var allPhones = InitiatePhones();
             var allComputers = InitiateComputers();
 
-            foreach (var car in allVehicles)
-            {
-                Console.WriteLine("Price when bought: " + car.PriceWhenPurchased);
-                Console.WriteLine("Distance ran: " + car.DistanceRanInKm + "Km");
-                Console.WriteLine("Resell value: " + car.ResellValue());
-                Console.WriteLine();
-            }
-
-            foreach (var phone in allPhones)
-            {
-                Console.WriteLine("Price when bought: " + phone.PriceWhenPurchased);
-                Console.WriteLine("Resell value: " + phone.ResellValue());
-                Console.WriteLine();
-            }
+            PrintMenu();
         }
 
 
@@ -83,7 +70,7 @@ namespace inventory
             }
         }
 
-        static OS StringToOS(string operatingSystem) //needs testing
+        static OS StringToOS(string operatingSystem)
         {
             operatingSystem.Replace(" ", "");
             operatingSystem.ToLower();
@@ -319,6 +306,37 @@ namespace inventory
             }
         }
 
-
+        static void PrintMenu()
+        {
+            Console.WriteLine(" ____________________________________________________");
+            Console.WriteLine("|                                                    |");
+            Console.WriteLine("| 1)  Print all products                             |");
+            Console.WriteLine("| 2)  Print all vehicles                             |");
+            Console.WriteLine("| 3)  Print all phones                               |");
+            Console.WriteLine("| 4)  Print all computers                            |");
+            Console.WriteLine("|____________________________________________________|");
+            Console.WriteLine("|                                                    |");
+            Console.WriteLine("| 5)  Add a vehicle                                  |");
+            Console.WriteLine("| 6)  Add a phone                                    |");
+            Console.WriteLine("| 7)  Add a computer                                 |");
+            Console.WriteLine("|____________________________________________________|");
+            Console.WriteLine("|                                                    |");
+            Console.WriteLine("| 8)  Delete a product                               |");
+            Console.WriteLine("|____________________________________________________|");
+            Console.WriteLine("|                                                    |");
+            Console.WriteLine("| 9)  Search product                                 |");
+            Console.WriteLine("| 10) Search computer with warranty ending in year   |");
+            Console.WriteLine("| 11) Search phones with warranty ending in year     |");
+            Console.WriteLine("| 12) Search vehicles with lincese ending next month |");
+            Console.WriteLine("| 13) Search products with batteries                 |");
+            Console.WriteLine("| 14) Search phones by manufacturer                  |");
+            Console.WriteLine("| 15) Search computers by OS                         |");
+            Console.WriteLine("|____________________________________________________|");
+            Console.WriteLine("|                                                    |");
+            Console.WriteLine("| 16) Print all resell value information             |");
+            Console.WriteLine("| 17) Print vehicle resell value information         |");
+            Console.WriteLine("| 18) Print electronics resell value information     |");
+            Console.WriteLine("|____________________________________________________|");
+        }
     }
 }
