@@ -10,23 +10,27 @@ namespace inventory
             var allVehicles = InitiateVehicles();
             var allPhones = InitiatePhones();
             var allComputers = InitiateComputers();
-            while (true) //add break
+            var choice = "";
+            while (choice != "0")
             {
                 PrintMenu();
 
-                var choice = Console.ReadLine().Replace(" ", "");
+                choice = Console.ReadLine().Replace(" ", "");
 
                 switch (choice)
                 {
                     case "1": //Print all products
                         PrintAllProducts(allVehicles, allPhones, allComputers);
                         break;
+
                     case "2": //Print all vehicles 
                         PrintAllVehicles(allVehicles);
                         break;
+
                     case "3": //Print all phones
                         PrintAllPhones(allPhones);
                         break;
+
                     case "4": //Print all computers
                         PrintAllComputers(allComputers);
                         break;
@@ -60,6 +64,7 @@ namespace inventory
                             newDayPurchased, newWarrantyInMonths, newPriceWhenPurchased, newManufacturer,
                             newExpireYear, newExpireMonth, newExpireDay, newDistanceRanInKm));
                         break;
+
                     case "6": //Add a phone
                         Console.WriteLine("Enter description: ");
                         newDescription = Console.ReadLine();
@@ -87,6 +92,7 @@ namespace inventory
                             newDayPurchased, newWarrantyInMonths, newPriceWhenPurchased, newManufacturer,
                             newPhoneNumber, newNameOfOwner, newLastNameOfOwner));
                         break;
+
                     case "7": //Add a computer
                         Console.WriteLine("Enter description: ");
                         newDescription = Console.ReadLine();
@@ -120,7 +126,136 @@ namespace inventory
                             newDayPurchased, newWarrantyInMonths, newPriceWhenPurchased, newManufacturer,
                             newHasBattery, newOS, newIsPortable));
                         break;
-                    
+
+                    case "8": //Delete a product
+                        Console.WriteLine("Enter serial number of the product you want to delete: ");
+                        Console.WriteLine("(If you want to check the Serial numbers enter '0' to go back to the menu)");
+                        var newSerialNumber = Console.ReadLine();
+                        if (newSerialNumber == "0")
+                            break;
+                        DeleteProduct(newSerialNumber, allVehicles, allPhones, allComputers);
+                        break;
+
+                    case "9": //Search product
+                        Console.WriteLine("Enter serial number of the product you want to search: ");
+                        Console.WriteLine("(If you want to check the Serial numbers enter '0' to go back to the menu)");
+                        newSerialNumber = Console.ReadLine();
+                        if (newSerialNumber == "0")
+                            break;
+                        Console.WriteLine();
+                        PrintProductBySerial(newSerialNumber, allVehicles, allPhones, allComputers);
+                        break;
+
+                    case "10": //Search computer with warranty ending in year
+                        Console.WriteLine("Enter the year you want to search by: ");
+                        var yearToSearch = Console.ReadLine();
+                        PrintComputersWarrantyEndingIn(yearToSearch, allComputers);
+                        break;
+
+                    case "11": //Search phones with warranty ending in year
+                        Console.WriteLine("Enter the year you want to search by: ");
+                        yearToSearch = Console.ReadLine();
+                        PrintPhoneUsersWarrantyEndingIn(yearToSearch, allPhones);
+                        break;
+                        
+                    case "12": //Search vehicles with lincese ending next month
+                        PrintVehiclesLincenseEndingNextMonth(allVehicles);
+                        break;
+
+                    case "13": //Search products with batteries
+                        Console.WriteLine("Number of products with batteries: " + NumberOfProductsWithBatteries(allPhones, allComputers));
+                        break;
+
+                    case "14": //Search phones by manufacturer
+                        Console.WriteLine("Enter the manufacturer you want to search: ");
+                        newManufacturer = StringToCompany(Console.ReadLine());
+                        Console.WriteLine();
+                        PrintPhoneByManufacturer(newManufacturer, allPhones);
+                        break;
+
+                    case "15": //Search computers by OS
+                        Console.WriteLine("Enter the OS you want to search: ");
+                        newOS = StringToOS(Console.ReadLine());
+                        Console.WriteLine();
+                        PrintComputerByOS(newOS, allComputers);
+
+                        break;
+
+                    case "16": //Print all resell value information
+                        var vehicleIndex = 0;
+                        foreach (var vehicle in allVehicles)
+                        {
+                            vehicleIndex++;
+                            Console.WriteLine("\nVEHICLE " + vehicleIndex + "\n");
+                            Console.WriteLine("Price when purchased: " + vehicle.PriceWhenPurchased + "Kn");
+                            Console.WriteLine("Resell value now: " + vehicle.ResellValue() + "Kn");
+                            Console.WriteLine("Price difference: " + (vehicle.PriceWhenPurchased - vehicle.ResellValue()) + "Kn");
+                        }
+                        var electronicsIndex = 0;
+
+                        foreach (var phone in allPhones)
+                        {
+                            electronicsIndex++;
+                            Console.WriteLine("\nPHONE " + electronicsIndex + "\n");
+                            Console.WriteLine("Price when purchased: " + phone.PriceWhenPurchased + "Kn");
+                            Console.WriteLine("Resell value now: " + phone.ResellValue() + "Kn");
+                            Console.WriteLine("Price difference: " + (phone.PriceWhenPurchased - phone.ResellValue()) + "Kn");
+                        }
+
+                        electronicsIndex = 0;
+
+                        foreach (var computer in allComputers)
+                        {
+                            electronicsIndex++;
+                            Console.WriteLine("\nCOMPUTER " + electronicsIndex + "\n");
+                            Console.WriteLine("Price when purchased: " + computer.PriceWhenPurchased + "Kn");
+                            Console.WriteLine("Resell value now: " + computer.ResellValue() + "Kn");
+                            Console.WriteLine("Price difference: " + (computer.PriceWhenPurchased - computer.ResellValue()) + "Kn");
+                        }
+                        break;
+
+                    case "17": //Print vehicle resell value information
+                        vehicleIndex = 0;
+                        foreach (var vehicle in allVehicles)
+                        {
+                            vehicleIndex++;
+                            Console.WriteLine("\nVEHICLE " + vehicleIndex + "\n");
+                            Console.WriteLine("Price when purchased: " + vehicle.PriceWhenPurchased + "Kn");
+                            Console.WriteLine("Resell value now: " + vehicle.ResellValue() + "Kn");
+                            Console.WriteLine("Price difference: " + (vehicle.PriceWhenPurchased - vehicle.ResellValue()) + "Kn");
+                        }
+                        break;
+
+                    case "18": //Print electronics resell value information
+                        electronicsIndex = 0;
+
+                        foreach (var phone in allPhones)
+                        {
+                            electronicsIndex++;
+                            Console.WriteLine("\nPHONE " + electronicsIndex + "\n");
+                            Console.WriteLine("Price when purchased: " + phone.PriceWhenPurchased + "Kn");
+                            Console.WriteLine("Resell value now: " + phone.ResellValue() + "Kn");
+                            Console.WriteLine("Price difference: " + (phone.PriceWhenPurchased - phone.ResellValue()) + "Kn");
+                        }
+
+                        electronicsIndex = 0;
+
+                        foreach (var computer in allComputers)
+                        {
+                            electronicsIndex++;
+                            Console.WriteLine("\nCOMPUTER " + electronicsIndex + "\n");
+                            Console.WriteLine("Price when purchased: " + computer.PriceWhenPurchased + "Kn");
+                            Console.WriteLine("Resell value now: " + computer.ResellValue() + "Kn");
+                            Console.WriteLine("Price difference: " + (computer.PriceWhenPurchased - computer.ResellValue()) + "Kn");
+                        }
+
+                        break;
+
+                    case "0": //Exit application
+                        break;
+                    default:
+                        Console.WriteLine("\nTHAT CHOICE IS NOT AN OPTION!");
+                        break;
                 }
             }
         }
@@ -176,7 +311,7 @@ namespace inventory
                 case "lenovo":
                     return Company.Lenovo;
                 default:
-                    Console.WriteLine("\nThat is not a valid manufacturer!\n");
+                    Console.WriteLine("\nThat is not a valid manufacturer!");
                     return Company.Default;
             }
         }
@@ -205,8 +340,8 @@ namespace inventory
             var allVehicles = new List<Vehicle>()
             {
                 new Vehicle("", "2010", "7", "13", "60", "100000", Company.Alfa, "2020", "7", "13", "120000"),
-                new Vehicle("", "2007", "10", "23", "60", "120000", Company.Lancia, "2019", "10", "23", "210000"),
-                new Vehicle("", "2016", "1", "19", "60", "240000", Company.Volkswagen, "2024", "1", "19", "60000"),
+                new Vehicle("", "2007", "10", "23", "60", "120000", Company.Lancia, "2019", "1", "23", "210000"),
+                new Vehicle("", "2017", "1", "19", "60", "240000", Company.Volkswagen, "2024", "1", "19", "60000"),
                 new Vehicle("", "2012", "6", "24", "60", "260000", Company.Audi, "2022", "6", "24", "150000"),
                 new Vehicle("", "1996", "12", "1", "60", "90000", Company.Citroen, "2019", "2", "19", "170000"),
             };
@@ -336,25 +471,28 @@ namespace inventory
                     return;
                 }
             }
-            Console.WriteLine("\nNo product with that serial number has been found!\n");
+            Console.WriteLine("No product with that serial number has been found!");
         }
 
         static void PrintComputersWarrantyEndingIn(string inputYear, List<Computer> allComputers)
         {
             inputYear.Replace(" ", "");
-
+            var counter = 0;
             foreach (var computer in allComputers)
             {
                 var warrantyEndYear = computer.DatePurchased.AddMonths(computer.WarrantyInMonths).Year;
                 if (warrantyEndYear == int.Parse(inputYear))
                 {
+                    counter++;
                     computer.Print();
                     Console.WriteLine();
                 }
             }
+            if (counter == 0)
+                Console.WriteLine("\nNo computers have been found for your request!");
         }
 
-        static int NumberOfProductsWithBatteries(List<MobilePhone> allPhones, List<Computer> allComputers)//needs testing
+        static int NumberOfProductsWithBatteries(List<MobilePhone> allPhones, List<Computer> allComputers)
         {
             var countBatteries = 0;
 
@@ -373,37 +511,64 @@ namespace inventory
             return countBatteries;
         }
 
-        static void PrintPhoneByManufacturer(Company manufacturerForSearch, List<MobilePhone> allPhones)//needs testing
+        static void PrintPhoneByManufacturer(Company manufacturerForSearch, List<MobilePhone> allPhones)
         {
+            var counter = 0;
             foreach (var phone in allPhones)
             {
                 if (phone.Manufacturer == manufacturerForSearch)
+                {
+                    counter++;
                     phone.Print();
+                }
             }
+            if (counter == 0)
+                Console.WriteLine("\nNo phones have been found for your request!");
         }
 
-        static void PrintPhoneUsersWarrantyEndingIn(string inputYear, List<MobilePhone> allPhones)//needs testing
+        static void PrintComputerByOS(OS OSForSearch, List<Computer> allComputers)
+        {
+            var counter = 0;
+            foreach (var computer in allComputers)
+            {
+                if (computer.OperativeSystem == OSForSearch)
+                {
+                    counter++;
+                    computer.Print();
+                }
+            }
+            if (counter == 0)
+                Console.WriteLine("\nNo computers have been found for your request!");
+        }
+
+        static void PrintPhoneUsersWarrantyEndingIn(string inputYear, List<MobilePhone> allPhones)
         {
             inputYear.Replace(" ", "");
+            var counter = 0;
             foreach (var phone in allPhones)
             {
                 var warrantyEndYear = phone.DatePurchased.AddMonths(phone.WarrantyInMonths).Year;
                 if (warrantyEndYear == int.Parse(inputYear))
                 {
+                    counter++;
                     Console.WriteLine("Name: " + phone.NameOfOwner);
                     Console.WriteLine("Last name: " + phone.LastNameOfOwner);
                     Console.WriteLine("Phone number: " + phone.PhoneNumber);
                     Console.WriteLine();
                 }
             }
+            if (counter == 0)
+                Console.WriteLine("\nNo phones have been found for your request!");
         }
 
-        static void PrintVehiclesLincenseEndingNextMonth(List<Vehicle> allVehicles)//needs testing
+        static void PrintVehiclesLincenseEndingNextMonth(List<Vehicle> allVehicles)//needs fixing
         {
+            var counter = 0;
             var monthSearch = DateTime.Now.Month + 1;
             var yearSearch = DateTime.Now.Year;
             if (monthSearch == 1)
                 yearSearch++;
+
             foreach (var vehicle in allVehicles)
             {
                 var monthExpires = vehicle.LicenseExpireDate.Month;
@@ -411,10 +576,14 @@ namespace inventory
 
                 if (monthSearch == monthExpires && yearSearch == yearExpires)
                 {
+                    counter++;
                     vehicle.Print();
                     Console.WriteLine();
                 }
             }
+            
+            if (counter == 0)
+                Console.WriteLine("\nNo vehicles have been found for your request!");
         }
 
         static void PrintMenu()
@@ -449,8 +618,9 @@ namespace inventory
             Console.WriteLine("| 18) Print electronics resell value information     |");
             Console.WriteLine("|____________________________________________________|");
             Console.WriteLine("|                                                    |");
-            Console.WriteLine("| 19) Exit application                               |");
+            Console.WriteLine("| 0)  Exit application                               |");
             Console.WriteLine("|____________________________________________________|");
+            Console.WriteLine();
         }
     }
 }

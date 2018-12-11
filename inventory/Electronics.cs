@@ -33,8 +33,6 @@ namespace inventory
             var newValue = (double)PriceWhenPurchased;
             var priceDropIndex = (int)(DateTime.Now.Subtract(DatePurchased).TotalDays / 30);
 
-            Console.WriteLine("index: " + priceDropIndex);
-
             for (int i = 0; i < priceDropIndex; i++)
             {
                 newValue = newValue * 0.05;
