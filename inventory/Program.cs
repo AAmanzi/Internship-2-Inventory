@@ -10,11 +10,122 @@ namespace inventory
             var allVehicles = InitiateVehicles();
             var allPhones = InitiatePhones();
             var allComputers = InitiateComputers();
+            while (true) //add break
+            {
+                PrintMenu();
 
-            PrintMenu();
+                var choice = Console.ReadLine().Replace(" ", "");
+
+                switch (choice)
+                {
+                    case "1": //Print all products
+                        PrintAllProducts(allVehicles, allPhones, allComputers);
+                        break;
+                    case "2": //Print all vehicles 
+                        PrintAllVehicles(allVehicles);
+                        break;
+                    case "3": //Print all phones
+                        PrintAllPhones(allPhones);
+                        break;
+                    case "4": //Print all computers
+                        PrintAllComputers(allComputers);
+                        break;
+
+                    case "5": //Add a vehicle
+                        Console.WriteLine("Enter description: ");
+                        var newDescription = Console.ReadLine();
+                        Console.WriteLine("Enter year purchased: ");
+                        var newYearPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter month purchased: ");
+                        var newMonthPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter day purchased: ");
+                        var newDayPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter lenght of warranty in months: ");
+                        var newWarrantyInMonths = Console.ReadLine();
+                        Console.WriteLine("Enter price when purchased: ");
+                        var newPriceWhenPurchased = Console.ReadLine().Replace(" ", "").Replace(",", "");
+                        Console.WriteLine("Enter manufacturer: ");
+                        var newManufacturer = StringToCompany(Console.ReadLine());
+
+                        Console.WriteLine("Enter year of license expiry: ");
+                        var newExpireYear = Console.ReadLine();
+                        Console.WriteLine("Enter month of license expiry: ");
+                        var newExpireMonth = Console.ReadLine();
+                        Console.WriteLine("Enter day of license expiry: ");
+                        var newExpireDay = Console.ReadLine();
+                        Console.WriteLine("Enter distance ran in kilometers: ");
+                        var newDistanceRanInKm = Console.ReadLine();
+
+                        allVehicles.Add(new Vehicle(newDescription, newYearPurchased, newMonthPurchased,
+                            newDayPurchased, newWarrantyInMonths, newPriceWhenPurchased, newManufacturer,
+                            newExpireYear, newExpireMonth, newExpireDay, newDistanceRanInKm));
+                        break;
+                    case "6": //Add a phone
+                        Console.WriteLine("Enter description: ");
+                        newDescription = Console.ReadLine();
+                        Console.WriteLine("Enter year purchased: ");
+                        newYearPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter month purchased: ");
+                        newMonthPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter day purchased: ");
+                        newDayPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter lenght of warranty in months: ");
+                        newWarrantyInMonths = Console.ReadLine();
+                        Console.WriteLine("Enter price when purchased: ");
+                        newPriceWhenPurchased = Console.ReadLine().Replace(" ", "").Replace(",", "");
+                        Console.WriteLine("Enter manufacturer: ");
+                        newManufacturer = StringToCompany(Console.ReadLine());
+
+                        Console.WriteLine("Enter phone number: ");
+                        var newPhoneNumber = Console.ReadLine().Replace(" ", "");
+                        Console.WriteLine("Enter name of owner: ");
+                        var newNameOfOwner = Console.ReadLine().Replace(" ", "");
+                        Console.WriteLine("Enter last name of owner: ");
+                        var newLastNameOfOwner = Console.ReadLine().Replace(" ", "");
+
+                        allPhones.Add(new MobilePhone(newDescription, newYearPurchased, newMonthPurchased,
+                            newDayPurchased, newWarrantyInMonths, newPriceWhenPurchased, newManufacturer,
+                            newPhoneNumber, newNameOfOwner, newLastNameOfOwner));
+                        break;
+                    case "7": //Add a computer
+                        Console.WriteLine("Enter description: ");
+                        newDescription = Console.ReadLine();
+                        Console.WriteLine("Enter year purchased: ");
+                        newYearPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter month purchased: ");
+                        newMonthPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter day purchased: ");
+                        newDayPurchased = Console.ReadLine();
+                        Console.WriteLine("Enter lenght of warranty in months: ");
+                        newWarrantyInMonths = Console.ReadLine();
+                        Console.WriteLine("Enter price when purchased: ");
+                        newPriceWhenPurchased = Console.ReadLine().Replace(" ", "").Replace(",", "");
+                        Console.WriteLine("Enter manufacturer: ");
+                        newManufacturer = StringToCompany(Console.ReadLine());
+
+                        Console.WriteLine("Does the computer have a battery: ");
+                        Console.WriteLine("\tPress Y for Yes");
+                        Console.WriteLine("\tPress anything else for No\n");
+                        var newHasBattery = Console.ReadKey().Key == ConsoleKey.Y;
+                        Console.WriteLine();
+                        Console.WriteLine("Enter OS: ");
+                        var newOS = StringToOS(Console.ReadLine());
+                        Console.WriteLine("Is the computer portable: ");
+                        Console.WriteLine("\tPress Y for Yes");
+                        Console.WriteLine("\tPress anything else for No\n");
+                        var newIsPortable = Console.ReadKey().Key == ConsoleKey.Y;
+                        Console.WriteLine();
+
+                        allComputers.Add(new Computer(newDescription, newYearPurchased, newMonthPurchased,
+                            newDayPurchased, newWarrantyInMonths, newPriceWhenPurchased, newManufacturer,
+                            newHasBattery, newOS, newIsPortable));
+                        break;
+                    
+                }
+            }
         }
 
-
+        
 
         static Company StringToCompany(string company)
         {
@@ -336,6 +447,9 @@ namespace inventory
             Console.WriteLine("| 16) Print all resell value information             |");
             Console.WriteLine("| 17) Print vehicle resell value information         |");
             Console.WriteLine("| 18) Print electronics resell value information     |");
+            Console.WriteLine("|____________________________________________________|");
+            Console.WriteLine("|                                                    |");
+            Console.WriteLine("| 19) Exit application                               |");
             Console.WriteLine("|____________________________________________________|");
         }
     }
