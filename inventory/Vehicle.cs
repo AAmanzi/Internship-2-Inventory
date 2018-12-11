@@ -34,5 +34,24 @@ namespace inventory
             Console.WriteLine($"License expires: {LicenseExpireDate.Day}/{LicenseExpireDate.Month}/{LicenseExpireDate.Year}");
             Console.WriteLine("Distance ran: " + DistanceRanInKm + " Km");
         }
+
+        public double ResellValue()
+        {
+            var newValue = (double)PriceWhenPurchased;
+            var priceDropIndex = DistanceRanInKm / 20000;
+
+            for (int i = 0; i < priceDropIndex; i++)
+            {
+                newValue = newValue * 0.9;
+                if (newValue <= PriceWhenPurchased * 0.2)
+                {
+                    newValue = PriceWhenPurchased * 0.2;
+                    break;
+                }
+            }
+            newValue = Math.Round(newValue, 2);
+
+            return newValue;
+        }
     }
 }

@@ -34,6 +34,8 @@ namespace inventory
             Console.WriteLine("Name of owner: " + NameOfOwner);
             Console.WriteLine("Last name of owner: " + LastNameOfOwner);
         }
+
+        
     }
 
 }

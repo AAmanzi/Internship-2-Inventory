@@ -27,5 +27,26 @@ namespace inventory
             base.Print();
             Console.WriteLine("Has battery: " + HasBattery);
         }
+
+        public double ResellValue()
+        {
+            var newValue = (double)PriceWhenPurchased;
+            var priceDropIndex = (int)(DateTime.Now.Subtract(DatePurchased).TotalDays / 30);
+
+            Console.WriteLine("index: " + priceDropIndex);
+
+            for (int i = 0; i < priceDropIndex; i++)
+            {
+                newValue = newValue * 0.05;
+                if (newValue <= PriceWhenPurchased * 0.3)
+                {
+                    newValue = PriceWhenPurchased * 0.3;
+                    break;
+                }
+            }
+
+            newValue = Math.Round(newValue, 2);
+            return newValue;
+        }
     }
 }

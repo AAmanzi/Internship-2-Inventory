@@ -11,7 +11,20 @@ namespace inventory
             var allPhones = InitiatePhones();
             var allComputers = InitiateComputers();
 
-            PrintAllProducts(allVehicles, allPhones, allComputers);
+            foreach (var car in allVehicles)
+            {
+                Console.WriteLine("Price when bought: " + car.PriceWhenPurchased);
+                Console.WriteLine("Distance ran: " + car.DistanceRanInKm + "Km");
+                Console.WriteLine("Resell value: " + car.ResellValue());
+                Console.WriteLine();
+            }
+
+            foreach (var phone in allPhones)
+            {
+                Console.WriteLine("Price when bought: " + phone.PriceWhenPurchased);
+                Console.WriteLine("Resell value: " + phone.ResellValue());
+                Console.WriteLine();
+            }
         }
 
 
@@ -70,7 +83,7 @@ namespace inventory
             }
         }
 
-        static OS StringToOS(string operatingSystem)
+        static OS StringToOS(string operatingSystem) //needs testing
         {
             operatingSystem.Replace(" ", "");
             operatingSystem.ToLower();
@@ -117,9 +130,9 @@ namespace inventory
         {
             var allComputers = new List<Computer>()
             {
-                new Computer("", "2018", "4", "30", "12", "7500", Company.HP, false, "windows", false),
-                new Computer("", "2017", "9", "3", "12", "7000", Company.Lenovo, true, "linux", true),
-                new Computer("", "2018", "6", "24", "12", "8500", Company.Asus, true, "windows", true),
+                new Computer("", "2018", "4", "30", "12", "7500", Company.HP, false, OS.Windows, false),
+                new Computer("", "2017", "9", "3", "12", "7000", Company.Lenovo, true, OS.Linux, true),
+                new Computer("", "2018", "6", "24", "12", "8500", Company.Apple, true, OS.MacOS, true),
             };
             return allComputers;
         }
@@ -243,7 +256,7 @@ namespace inventory
             }
         }
 
-        static int NumberOfProductsWithBatteries(List<MobilePhone> allPhones, List<Computer> allComputers)
+        static int NumberOfProductsWithBatteries(List<MobilePhone> allPhones, List<Computer> allComputers)//needs testing
         {
             var countBatteries = 0;
 
@@ -262,12 +275,47 @@ namespace inventory
             return countBatteries;
         }
 
-        static void PrintPhoneByManufacturer(Company manufacturerForSearch, List<MobilePhone> allPhones)
+        static void PrintPhoneByManufacturer(Company manufacturerForSearch, List<MobilePhone> allPhones)//needs testing
         {
             foreach (var phone in allPhones)
             {
                 if (phone.Manufacturer == manufacturerForSearch)
                     phone.Print();
+            }
+        }
+
+        static void PrintPhoneUsersWarrantyEndingIn(string inputYear, List<MobilePhone> allPhones)//needs testing
+        {
+            inputYear.Replace(" ", "");
+            foreach (var phone in allPhones)
+            {
+                var warrantyEndYear = phone.DatePurchased.AddMonths(phone.WarrantyInMonths).Year;
+                if (warrantyEndYear == int.Parse(inputYear))
+                {
+                    Console.WriteLine("Name: " + phone.NameOfOwner);
+                    Console.WriteLine("Last name: " + phone.LastNameOfOwner);
+                    Console.WriteLine("Phone number: " + phone.PhoneNumber);
+                    Console.WriteLine();
+                }
+            }
+        }
+
+        static void PrintVehiclesLincenseEndingNextMonth(List<Vehicle> allVehicles)//needs testing
+        {
+            var monthSearch = DateTime.Now.Month + 1;
+            var yearSearch = DateTime.Now.Year;
+            if (monthSearch == 1)
+                yearSearch++;
+            foreach (var vehicle in allVehicles)
+            {
+                var monthExpires = vehicle.LicenseExpireDate.Month;
+                var yearExpires = vehicle.LicenseExpireDate.Year;
+
+                if (monthSearch == monthExpires && yearSearch == yearExpires)
+                {
+                    vehicle.Print();
+                    Console.WriteLine();
+                }
             }
         }
 

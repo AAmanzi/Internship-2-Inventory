@@ -38,5 +38,10 @@ namespace inventory
             Console.WriteLine("Operative system: " + OperativeSystem);
             Console.WriteLine("Is portable: " + IsPortable);
         }
+
+        public new double ResellValue()
+        {
+            return base.ResellValue();
+        }
     }
 }

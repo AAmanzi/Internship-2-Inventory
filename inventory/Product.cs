@@ -18,10 +18,10 @@ namespace inventory
         Opel = 10,
 
         Samsung = 11,
-        Apple = 12,
+        Xiaomi = 12,
         Huawei = 13,
         Sony = 14,
-        Xiaomi = 15,
+        Apple = 15,
 
         Asus = 16,
         Acer = 17,
@@ -68,5 +68,6 @@ namespace inventory
             Console.WriteLine("Price when purchased: " + PriceWhenPurchased + "Kn");
             Console.WriteLine("Manufacturer: " + Manufacturer);
         }
+
     }
 }
