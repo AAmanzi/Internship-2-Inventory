@@ -340,8 +340,8 @@ namespace inventory
             var allVehicles = new List<Vehicle>()
             {
                 new Vehicle("", "2010", "7", "13", "60", "100000", Company.Alfa, "2020", "7", "13", "120000"),
-                new Vehicle("", "2007", "10", "23", "60", "120000", Company.Lancia, "2019", "1", "23", "210000"),
-                new Vehicle("", "2017", "1", "19", "60", "240000", Company.Volkswagen, "2024", "1", "19", "60000"),
+                new Vehicle("", "2007", "10", "23", "60", "120000", Company.Lancia, "2019", "1", "9", "210000"),
+                new Vehicle("", "2017", "1", "10", "60", "240000", Company.Volkswagen, "2024", "1", "10", "60000"),
                 new Vehicle("", "2012", "6", "24", "60", "260000", Company.Audi, "2022", "6", "24", "150000"),
                 new Vehicle("", "1996", "12", "1", "60", "90000", Company.Citroen, "2019", "2", "19", "170000"),
             };
@@ -564,24 +564,18 @@ namespace inventory
         static void PrintVehiclesLincenseEndingNextMonth(List<Vehicle> allVehicles)//needs fixing
         {
             var counter = 0;
-            var monthSearch = DateTime.Now.Month + 1;
-            var yearSearch = DateTime.Now.Year;
-            if (monthSearch == 1)
-                yearSearch++;
 
             foreach (var vehicle in allVehicles)
             {
-                var monthExpires = vehicle.LicenseExpireDate.Month;
-                var yearExpires = vehicle.LicenseExpireDate.Year;
-
-                if (monthSearch == monthExpires && yearSearch == yearExpires)
+                if ((vehicle.LicenseExpireDate - DateTime.Now).Days <= 30)
                 {
                     counter++;
                     vehicle.Print();
                     Console.WriteLine();
                 }
+                
             }
-            
+
             if (counter == 0)
                 Console.WriteLine("\nNo vehicles have been found for your request!");
         }
