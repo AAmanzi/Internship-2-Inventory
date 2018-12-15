@@ -35,7 +35,7 @@ namespace inventory
 
             for (int i = 0; i < priceDropIndex; i++)
             {
-                newValue = newValue * 0.05;
+                newValue = newValue * 0.95;
                 if (newValue <= PriceWhenPurchased * 0.3)
                 {
                     newValue = PriceWhenPurchased * 0.3;
